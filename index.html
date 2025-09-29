@@ -392,6 +392,27 @@ footer {
         doc.text(`Texto: ${item.Texto}`, 10, 22 + index * 20);
       });
       doc.save("Turkiye Actv. Data.pdf");
+
+		// Criar TXT em formato de tabela
+   let conteudo = "";
+
+   // Cabeçalho
+   conteudo += "Aba".padEnd(25) + "Status".padEnd(20) + "Texto\n";
+   conteudo += "-".repeat(70) + "\n";
+
+   // Linhas
+   dados.forEach((item) => {
+     conteudo += item.Aba.padEnd(25);
+     conteudo += item.Status.padEnd(20);
+     conteudo += item.Texto + "\n";
+   });
+
+   // Criar blob e salvar
+   const blob = new Blob([conteudo], { type: "text/plain" });
+   const link = document.createElement("a");
+   link.href = URL.createObjectURL(blob);
+   link.download = "Turkiye_Actv_Data.txt";
+   link.click();
     }
   </script>
   
@@ -403,3 +424,4 @@ footer {
 </footer>
 </body>
 </html>
+
